@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import DailyRecord from "./components/DailyRecord";
 import { Provider } from "mobx-react";
 import Store from "@/stores/index";
+import ModalProvider from "./components/Modal/ModalProvider";
 
 const store = new Store();
 
@@ -27,6 +28,7 @@ function App() {
         {/* {JSON.stringify(response)} */}
         <Calendar dayContents={DailyRecord} />
       </DndProvider>
+      <ModalProvider />
     </Provider>
   );
 }
