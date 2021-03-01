@@ -10,6 +10,7 @@ module.exports = override(
   addWebpackAlias({
     ["@/components"]: path.resolve(__dirname, "./src/components"),
     ["@/stores"]: path.resolve(__dirname, "./src/stores"),
+    ["@/hooks"]: path.resolve(__dirname, "./src/hooks"),
   }),
   disableEsLint(),
   addDecoratorsLegacy()
