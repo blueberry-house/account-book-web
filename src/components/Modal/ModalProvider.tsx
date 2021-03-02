@@ -8,7 +8,13 @@ function ModalProvider() {
 
   if (!modal.type) return null;
 
-  return <Modal type={modal.type} props={modal.props} />;
+  return (
+    <Modal
+      type={modal.type}
+      props={modal.props}
+      onClose={() => modal.close.call(modal)}
+    />
+  );
 }
 
 export default observer(ModalProvider);

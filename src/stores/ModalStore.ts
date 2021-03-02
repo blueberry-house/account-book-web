@@ -1,9 +1,19 @@
 import { observable, action, makeAutoObservable } from "mobx";
 import Modals from "@/components/Modal/Modals";
 
-interface Modal {
+interface ModalButton {
+  text: string;
+  onClick?: () => void;
+}
+
+interface BaseModalProps {
+  title?: string;
+  buttons?: ModalButton[];
+}
+
+export interface Modal {
   type: keyof typeof Modals;
-  props?: unknown;
+  props?: unknown & BaseModalProps;
 }
 
 export default class ModalStore {
@@ -12,7 +22,7 @@ export default class ModalStore {
   }
 
   @observable type: Modal["type"] | null = null;
-  @observable props: Modal["props"] = null;
+  @observable props: Modal["props"] = {};
 
   @action open(modal: Modal) {
     this.type = modal.type;
@@ -21,6 +31,6 @@ export default class ModalStore {
 
   @action close() {
     this.type = null;
-    this.props = null;
+    this.props = {};
   }
 }

@@ -13,8 +13,33 @@ export const Container = styled.div`
 `;
 
 export const Modal = styled.div`
-  padding: 30px 50px;
+  min-width: 200px;
   border-radius: 10px;
   background: #fff;
   box-shadow: 0 0 0 1px #eee;
+`;
+
+export const ModalHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border-bottom: 1px solid #eee;
+`;
+
+export const ModalBody = styled.div`
+  padding: 30px;
+`;
+
+export const ModalButtons = styled.div`
+  display: flex;
+  border-top: 1px solid #eee;
+`;
+
+export const ModalButton = styled.button`
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
 `;
