@@ -20,7 +20,7 @@ function DailyRecord({ day, month, year }: DailyRecordProps) {
   const date = useMemo(() => `${year}-${month}-${day}`, [year, month, day]);
 
   const { store } = useStores();
-  const { dailyRecord } = store;
+  const { dailyRecord, modal } = store;
   const records = dailyRecord.records[date];
 
   const [, drop] = useDrop({
@@ -48,7 +48,7 @@ function DailyRecord({ day, month, year }: DailyRecordProps) {
   }
 
   return (
-    <div ref={drop} onClick={addCard}>
+    <div ref={drop}>
       {records?.map(
         (record) =>
           record && (
@@ -69,6 +69,16 @@ function DailyRecord({ day, month, year }: DailyRecordProps) {
           focusOnMount
         />
       )}
+      <button
+        onClick={() => {
+          modal.open({
+            type: "CreateDayLogItem",
+            props: { buttons: [{ text: "등록" }] },
+          });
+        }}
+      >
+        추가
+      </button>
     </div>
   );
 }

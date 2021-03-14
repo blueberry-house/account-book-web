@@ -51,6 +51,7 @@ export default function Select<Value>({
   function select(value: Value) {
     setCurrentValue(value);
     onSelect(value);
+    setExpanded(false);
   }
 
   return (

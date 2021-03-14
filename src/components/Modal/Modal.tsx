@@ -25,7 +25,7 @@ export default function Modal({ type, props, onClose }: ModalProps) {
     return () => window.removeEventListener("keydown", handleKeydown);
   }, []);
 
-  const TypedModal = Modals[type];
+  const TypedModal = Modals[type] || null;
   const title = props?.title;
   const buttons = props?.buttons;
   return (

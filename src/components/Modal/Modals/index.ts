@@ -1,3 +1,3 @@
-import DailyRecordDetail from "./DailyRecordDetail";
+import CreateDayLogItem from "./DayLogItem/Create";
 
-export default { DailyRecordDetail };
+export default { CreateDayLogItem };

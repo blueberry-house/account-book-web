@@ -11,6 +11,7 @@ module.exports = override(
     ["@/components"]: path.resolve(__dirname, "./src/components"),
     ["@/stores"]: path.resolve(__dirname, "./src/stores"),
     ["@/hooks"]: path.resolve(__dirname, "./src/hooks"),
+    ["@/models"]: path.resolve(__dirname, "./src/models"),
   }),
   disableEsLint(),
   addDecoratorsLegacy()
