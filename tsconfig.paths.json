@@ -5,7 +5,7 @@
       "@/components/*": ["./src/components/*"],
       "@/stores/*": ["./src/stores/*"],
       "@/hooks/*": ["./src/hooks/*"],
-      "@/models/*": ["./src/models/*"],
+      "@/types/*": ["./src/types/*"],
       "@/modals/*": ["./src/modals/*"],
       "*": ["./src/*"]
     }

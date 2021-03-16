@@ -11,7 +11,7 @@ module.exports = override(
     ["@/components"]: path.resolve(__dirname, "./src/components"),
     ["@/stores"]: path.resolve(__dirname, "./src/stores"),
     ["@/hooks"]: path.resolve(__dirname, "./src/hooks"),
-    ["@/models"]: path.resolve(__dirname, "./src/models"),
+    ["@/types"]: path.resolve(__dirname, "./src/types"),
     ["@/modals"]: path.resolve(__dirname, "./src/modals"),
   }),
   disableEsLint(),

@@ -9,12 +9,12 @@ const options = [
   {
     key: "KB",
     text: "국민은행",
-    value: 1,
+    value: 2,
   },
   {
     key: "SH",
     text: "신한은행",
-    value: 2,
+    value: 3,
   },
 ];
 

@@ -7,21 +7,22 @@ export interface ModalProps {
   title?: string;
   closeText?: string;
   confirmText?: string;
-  onClose: () => void;
-  onConfirm?: () => void;
+  onClose?: () => void;
+  onConfirm?: (args: any) => void;
 }
 
 export default function Modal({
   title,
   closeText = "취소",
-  confirmText,
+  confirmText = "확인",
   onClose,
+  onConfirm,
   children,
 }: PropsWithChildren<ModalProps>) {
   const modal = useRef<HTMLDivElement>(null);
 
   function close() {
-    onClose();
+    onClose?.();
   }
 
   useInteractOutside({ ref: modal, onInteractOutside: close });
@@ -34,7 +35,9 @@ export default function Modal({
         <S.ModalBody>{children}</S.ModalBody>
         <S.ModalButtons>
           <S.ModalButton onClick={close}>{closeText}</S.ModalButton>
-          {confirmText && <S.ModalButton>{confirmText}</S.ModalButton>}
+          {onConfirm && (
+            <S.ModalButton onClick={onConfirm}>{confirmText}</S.ModalButton>
+          )}
         </S.ModalButtons>
       </S.Modal>
     </S.Container>

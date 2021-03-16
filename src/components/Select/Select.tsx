@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import * as S from "./Select.style";
 import useClientOffsets from "@/hooks/useClientOffsets";
 import useInteractOutside from "@/hooks/useInteractOutside";
@@ -44,29 +44,31 @@ export default function Select<Value>({
     [inputOffsets]
   );
 
-  const [currentValue, setCurrentValue] = useState<Value | undefined>(
-    initialValue
+  const [value, setValue] = useState<Value | undefined>(initialValue);
+  const text = useMemo(
+    () => options.find((option) => option.value === value)?.text || placeholder,
+    [value]
   );
 
-  function select(value: Value) {
-    setCurrentValue(value);
+  useEffect(() => {
+    if (!value) return;
     onSelect(value);
     setExpanded(false);
-  }
+  }, [value]);
 
   return (
     <div ref={container}>
       <S.Input ref={input} onClick={toggleExpand}>
-        {currentValue || placeholder}
+        {text}
       </S.Input>
       <S.Menu expanded={expanded} {...menuOffsets}>
-        {options.map(({ key, text, value }) => (
+        {options.map((option) => (
           <S.Option
-            key={key}
-            selected={value === currentValue}
-            onClick={() => select(value)}
+            key={option.key}
+            selected={option.value === value}
+            onClick={() => setValue(option.value)}
           >
-            {text}
+            {option.text}
           </S.Option>
         ))}
       </S.Menu>

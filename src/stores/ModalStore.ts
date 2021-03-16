@@ -1,36 +1,33 @@
 import { observable, action, makeAutoObservable } from "mobx";
-import { default as modalTypes } from "@/modals/modalRegister";
+import { default as modals } from "@/modals/modalRegister";
+import { ComponentProps } from "react";
 
-interface ModalButton {
-  text: string;
-  onClick?: () => void;
-}
-
-interface BaseModalProps {
-  title?: string;
-  buttons?: ModalButton[];
-}
-
-export interface Modal {
-  type: keyof typeof modalTypes;
-  props?: unknown & BaseModalProps;
-}
+type ModalType = keyof typeof modals;
+type ModalProps = Omit<Distribute<ModalType>, "type">;
 
 export default class ModalStore {
   constructor() {
     makeAutoObservable(this);
   }
 
-  @observable type: Modal["type"] | null = null;
-  @observable props: Modal["props"] = {};
+  @observable type: ModalType | null = null;
+  props: ModalProps = {} as ModalProps;
+  test = {
+    test: () => console.log("a"),
+  };
 
-  @action open(modal: Modal) {
-    this.type = modal.type;
-    this.props = modal.props;
+  @action open({ type, ...props }: Distribute<ModalType>) {
+    this.type = type;
+    this.props = props;
+    action("confirm", this.props.onConfirm);
   }
 
   @action close() {
     this.type = null;
-    this.props = {};
+    this.props = {} as ModalProps;
   }
 }
+
+type Distribute<K> = K extends keyof typeof modals
+  ? { type: K } & ComponentProps<typeof modals[K]>
+  : never;

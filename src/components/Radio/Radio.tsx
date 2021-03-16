@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./Radio.style";
 
 interface Option<Value> {
@@ -18,24 +18,21 @@ export default function Radio<Value>({
   initialValue,
   onSelect,
 }: RadioProps<Value>) {
-  const [currentValue, setCurrentValue] = useState<Value>(
-    initialValue || options[0].value
-  );
+  const [value, setValue] = useState<Value>(initialValue || options[0].value);
 
-  function select(value: Value) {
-    setCurrentValue(value);
+  useEffect(() => {
     onSelect(value);
-  }
+  }, [value]);
 
   return (
     <S.Group>
-      {options.map(({ key, value, text }) => (
+      {options.map((option) => (
         <S.Option
-          key={key}
-          selected={value === currentValue}
-          onClick={() => select(value)}
+          key={option.key}
+          selected={option.value === value}
+          onClick={() => setValue(option.value)}
         >
-          {text}
+          {option.text}
         </S.Option>
       ))}
     </S.Group>

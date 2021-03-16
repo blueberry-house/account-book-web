@@ -1,5 +1,5 @@
 import Radio from "@/components/Radio";
-import { DAY_LOG_ITEM_TYPE } from "@/models/DayLog";
+import { DAY_LOG_ITEM_TYPE } from "@/types/DayLog";
 
 const options = [
   {

@@ -72,7 +72,9 @@ function DailyRecord({ day, month, year }: DailyRecordProps) {
       <button
         onClick={() => {
           modal.open({
-            type: "TestModal",
+            type: "CreateDayLogItemModal",
+            onConfirm: (v) => console.log(v),
+            title: "test",
           });
         }}
       >
