@@ -6,6 +6,7 @@
       "@/stores/*": ["./src/stores/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/models/*": ["./src/models/*"],
+      "@/modals/*": ["./src/modals/*"],
       "*": ["./src/*"]
     }
   }

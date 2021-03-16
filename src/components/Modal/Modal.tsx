@@ -1,49 +1,41 @@
-import Modals from "./Modals";
-import * as S from "./Modal.style";
-import { useEffect, useRef } from "react";
-import { Modal as StoreModal } from "@/stores/ModalStore";
 import useInteractOutside from "@/hooks/useInteractOutside";
+import useKeydown from "@/hooks/useKeydown";
+import { PropsWithChildren, useRef } from "react";
+import * as S from "./Modal.style";
 
-interface ModalProps extends StoreModal {
-  onClose?: () => void;
+export interface ModalProps {
+  title?: string;
+  closeText?: string;
+  confirmText?: string;
+  onClose: () => void;
+  onConfirm?: () => void;
 }
 
-export default function Modal({ type, props, onClose }: ModalProps) {
+export default function Modal({
+  title,
+  closeText = "취소",
+  confirmText,
+  onClose,
+  children,
+}: PropsWithChildren<ModalProps>) {
   const modal = useRef<HTMLDivElement>(null);
 
   function close() {
-    onClose?.();
+    onClose();
   }
 
   useInteractOutside({ ref: modal, onInteractOutside: close });
+  useKeydown({ key: "Escape", onDown: close });
 
-  useEffect(() => {
-    function handleKeydown(e: KeyboardEvent) {
-      if (e.key === "Escape") close();
-    }
-    window.addEventListener("keydown", handleKeydown);
-    return () => window.removeEventListener("keydown", handleKeydown);
-  }, []);
-
-  const TypedModal = Modals[type] || null;
-  const title = props?.title;
-  const buttons = props?.buttons;
   return (
     <S.Container>
       <S.Modal ref={modal}>
         {title && <S.ModalHeader>{title}</S.ModalHeader>}
-        <S.ModalBody>
-          <TypedModal />
-        </S.ModalBody>
-        {buttons && (
-          <S.ModalButtons>
-            {buttons.map((button, i) => (
-              <S.ModalButton key={i} onClick={button.onClick}>
-                {button.text}
-              </S.ModalButton>
-            ))}
-          </S.ModalButtons>
-        )}
+        <S.ModalBody>{children}</S.ModalBody>
+        <S.ModalButtons>
+          <S.ModalButton onClick={close}>{closeText}</S.ModalButton>
+          {confirmText && <S.ModalButton>{confirmText}</S.ModalButton>}
+        </S.ModalButtons>
       </S.Modal>
     </S.Container>
   );

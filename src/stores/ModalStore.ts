@@ -1,5 +1,5 @@
 import { observable, action, makeAutoObservable } from "mobx";
-import Modals from "@/components/Modal/Modals";
+import { default as modalTypes } from "@/modals/modalRegister";
 
 interface ModalButton {
   text: string;
@@ -12,7 +12,7 @@ interface BaseModalProps {
 }
 
 export interface Modal {
-  type: keyof typeof Modals;
+  type: keyof typeof modalTypes;
   props?: unknown & BaseModalProps;
 }
 

@@ -72,8 +72,7 @@ function DailyRecord({ day, month, year }: DailyRecordProps) {
       <button
         onClick={() => {
           modal.open({
-            type: "CreateDayLogItem",
-            props: { buttons: [{ text: "등록" }] },
+            type: "TestModal",
           });
         }}
       >

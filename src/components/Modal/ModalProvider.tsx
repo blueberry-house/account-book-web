@@ -1,20 +1,14 @@
 import useStores from "@/stores/useStores";
 import { observer } from "mobx-react";
-import Modal from "./Modal";
+import { default as Modal } from "@/modals/modalRegister";
 
 function ModalProvider() {
   const { store } = useStores();
   const { modal } = store;
 
   if (!modal.type) return null;
-
-  return (
-    <Modal
-      type={modal.type}
-      props={modal.props}
-      onClose={() => modal.close.call(modal)}
-    />
-  );
+  const TypedModal = Modal[modal.type];
+  return <TypedModal onClose={modal.close.bind(modal)} />;
 }
 
 export default observer(ModalProvider);
