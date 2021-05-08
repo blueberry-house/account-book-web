@@ -1,5 +1,0 @@
-export enum DAY_LOG_ITEM_TYPE {
-  INCOME = "INCOME",
-  OUTGO = "OUTGO",
-  TRANSFER = "TRANSFER",
-}
