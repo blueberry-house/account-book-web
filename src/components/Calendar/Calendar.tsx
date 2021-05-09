@@ -8,7 +8,7 @@ interface Props {
 	renderItem?: (date: Date) => ReactElement
 }
 
-export default function Calendar<P>({ baseDay = 1, renderItem }: Props) {
+export default function Calendar({ baseDay = 1, renderItem }: Props) {
 	const today = useMemo(() => dayjs(), [])
 
 	// Initialize: set days based on today
