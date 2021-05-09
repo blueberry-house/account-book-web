@@ -34,7 +34,7 @@ export const Modal = styled.div`
 	animation: ${slideIn} 0.2s ease-in-out;
 `
 
-export const ModalHeader = styled.div`
+export const Header = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -43,7 +43,7 @@ export const ModalHeader = styled.div`
 	font-weight: bold;
 `
 
-export const ModalBody = styled.div`
+export const Body = styled.div`
 	position: relative;
 	font-size: 14px;
 	text-align: center;
@@ -64,17 +64,17 @@ export const ModalBody = styled.div`
 	}
 `
 
-export const ModalBodyScroller = styled.div`
+export const BodyScroller = styled.div`
 	overflow-y: auto;
 	max-height: 60vh;
 	padding: 20px 30px 40px;
 `
 
-export const ModalFooter = styled.div`
+export const Footer = styled.div`
 	display: flex;
 `
 
-export const ModalButton = styled.button`
+export const Button = styled.button`
 	position: relative;
 	flex: 1;
 	height: 50px;

@@ -47,17 +47,17 @@ export default forwardRef<ModalActions, PropsWithChildren<ModalProps>>((props, r
 	)
 })
 
-function Modal({ children, open, close, ...props }: PropsWithChildren<ModalProps & ModalActions>) {
-	const {
-		title,
-		closeOnClickOutside = true,
-		hasCancel,
-		cancelText = '취소',
-		hasConfirm,
-		confirmText = '확인',
-		onConfirm,
-	} = props
-
+function Modal({
+	children,
+	close,
+	title,
+	closeOnClickOutside = true,
+	hasCancel,
+	cancelText = '취소',
+	hasConfirm,
+	confirmText = '확인',
+	onConfirm,
+}: PropsWithChildren<ModalProps & ModalActions>) {
 	const handleConfirm = () => {
 		onConfirm?.()
 		close()
@@ -102,16 +102,16 @@ function Modal({ children, open, close, ...props }: PropsWithChildren<ModalProps
 	return (
 		<S.Container onClick={handleClickOutside}>
 			<S.Modal ref={modal} tabIndex={1}>
-				{title && <S.ModalHeader>{title}</S.ModalHeader>}
+				{title && <S.Header>{title}</S.Header>}
 				{children && (
-					<S.ModalBody>
-						<S.ModalBodyScroller>{children}</S.ModalBodyScroller>
-					</S.ModalBody>
+					<S.Body>
+						<S.BodyScroller>{children}</S.BodyScroller>
+					</S.Body>
 				)}
-				<S.ModalFooter>
-					{hasCancel && <S.ModalButton onClick={close}>{cancelText}</S.ModalButton>}
-					{hasConfirm && <S.ModalButton onClick={handleConfirm}>{confirmText}</S.ModalButton>}
-				</S.ModalFooter>
+				<S.Footer>
+					{hasCancel && <S.Button onClick={close}>{cancelText}</S.Button>}
+					{hasConfirm && <S.Button onClick={handleConfirm}>{confirmText}</S.Button>}
+				</S.Footer>
 			</S.Modal>
 		</S.Container>
 	)
