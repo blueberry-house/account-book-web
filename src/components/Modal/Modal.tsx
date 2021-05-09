@@ -15,9 +15,9 @@ export interface ModalProps {
 	closeOnClickOutside?: boolean
 	hasCancel?: boolean
 	cancelText?: string
-	onCancel?: () => void
 	hasConfirm?: boolean
 	confirmText?: string
+	onClose?: () => void
 	onConfirm?: () => void
 }
 
@@ -30,7 +30,10 @@ export default forwardRef<ModalActions, PropsWithChildren<ModalProps>>((props, r
 	const [visible, setVisible] = useState(false)
 
 	const open = () => setVisible(true)
-	const close = () => setVisible(false)
+	const close = () => {
+		setVisible(false)
+		props.onClose?.()
+	}
 	useImperativeHandle(ref, () => ({ open, close }))
 
 	return (
@@ -50,16 +53,10 @@ function Modal({ children, open, close, ...props }: PropsWithChildren<ModalProps
 		closeOnClickOutside = true,
 		hasCancel,
 		cancelText = '취소',
-		onCancel,
 		hasConfirm,
 		confirmText = '확인',
 		onConfirm,
 	} = props
-
-	const handleCancel = () => {
-		onCancel?.()
-		close()
-	}
 
 	const handleConfirm = () => {
 		onConfirm?.()
@@ -68,7 +65,7 @@ function Modal({ children, open, close, ...props }: PropsWithChildren<ModalProps
 
 	const handleClickOutside = (e: MouseEvent) => {
 		if (!closeOnClickOutside) return
-		if (e.target === e.currentTarget) handleCancel()
+		if (e.target === e.currentTarget) close()
 	}
 
 	// prevent scroll of body when modal is visible
@@ -93,7 +90,7 @@ function Modal({ children, open, close, ...props }: PropsWithChildren<ModalProps
 	// add listener on keyboard events
 	useEffect(() => {
 		const handleKeydown = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') handleCancel()
+			if (e.key === 'Escape') close()
 			if (e.key === 'Enter') handleConfirm()
 		}
 		window.addEventListener('keydown', handleKeydown)
@@ -112,7 +109,7 @@ function Modal({ children, open, close, ...props }: PropsWithChildren<ModalProps
 					</S.ModalBody>
 				)}
 				<S.ModalFooter>
-					{hasCancel && <S.ModalButton onClick={handleCancel}>{cancelText}</S.ModalButton>}
+					{hasCancel && <S.ModalButton onClick={close}>{cancelText}</S.ModalButton>}
 					{hasConfirm && <S.ModalButton onClick={handleConfirm}>{confirmText}</S.ModalButton>}
 				</S.ModalFooter>
 			</S.Modal>
