@@ -14,12 +14,7 @@ export default createGlobalStyle`
     overflow-wrap: break-word;
     overflow-y: scroll;
     -ms-overflow-style: scrollbar;
-
-    &.noScroll {
-      overflow: hidden !important;
-      position: fixed;
-      width: 100%;
-    }
+    margin: 0;
   }
 
   *,

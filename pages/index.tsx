@@ -1,3 +1,5 @@
+import Calendar from '@components/Calendar'
+import DailyMoneySheet from '@components/DailyMoneySheet'
 import Modal, { useModal } from '@components/Modal'
 
 export default function Home() {
@@ -15,6 +17,7 @@ export default function Home() {
 			>
 				테스트
 			</Modal>
+			<Calendar renderItem={date => <DailyMoneySheet {...date} />} />
 		</div>
 	)
 }
