@@ -1,7 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
+import { notoFont } from './FontStyle'
 
 export default createGlobalStyle`
   html {
+    font: normal 10px ${notoFont};
+    -webkit-font-smoothing: antialiased;
     touch-action: manipulation;
     -webkit-touch-callout: none;
     user-select: none;

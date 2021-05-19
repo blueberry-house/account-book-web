@@ -1,3 +1,4 @@
+import Fonts from '@components/Head/Fonts'
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
@@ -29,7 +30,9 @@ class MyDocument extends Document {
 	render() {
 		return (
 			<Html>
-				<Head />
+				<Head>
+					<Fonts />
+				</Head>
 				<body>
 					<Main />
 					<NextScript />
